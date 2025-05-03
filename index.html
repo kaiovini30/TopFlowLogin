@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Central Top Flow </title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .header {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .header img {
+      width: 300px;
+      vertical-align: middle;
+    }
+
+    .box {
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 420px;
+      width: 100%;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #777;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      transition: border 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #666;
+    }
+
+    button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    #jumpscare {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #jumpscare img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+
+    #footer {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      font-size: 12px;
+      color: #777;
+    }
+
+    #footer a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    #footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <img src="https://i.ibb.co/mrxKCMwZ/1000882509.gif" alt="Logo do Site">
+  </div>
+
+  <div class="box">
+    <h1>𝑇𝑂𝑃 𝐹𝐿𝑂𝑂𝑊</h1>
+    <p>Conecte-se para crescer em qualquer rede social. Entre com suas credenciais abaixo.</p>
+    <input type="text" placeholder="usuário" id="usuario" required>
+    <input type="password" placeholder="Key" id="senha" required>
+    <button onclick="ativarJumpscare()">Login</button>
+
+    <p>Não tem uma conta? <a href="#">Cadastre-se aqui</a></p>
+  </div>
+
+  <div id="jumpscare">
+    <audio id="audio" src="https://www.myinstants.com/media/sounds/screamer.mp3" loop></audio>
+    <audio id="audio2" src="https://www.myinstants.com/media/sounds/jeff-the-killer.mp3" loop></audio>
+    <img src="https://i.ibb.co/fZTXpTN/1000882520.gif" alt="Jumpscare">
+  </div>
+
+  <!-- Áudio de fundo do login -->
+  <audio id="bgAudio" src="https://www.myinstants.com/media/sounds/soundpad.mp3" autoplay loop></audio>
+
+  <div id="footer">
+    <p>Ao continuar, você concorda com nossa <a href="#">Política de Privacidade</a>, <a href="#">Termos de Uso</a> e o uso de <a href="#">Cookies</a>.</p>
+    <p>Utilizamos cookies para garantir que você tenha a melhor experiência em nosso site. Ao usar nosso site, você concorda com o uso de cookies.</p>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const bgAudio = document.getElementById('bgAudio');
+      bgAudio.volume = 0.2; // volume baixo
+    });
+
+    function ativarJumpscare() {
+      const usuario = document.getElementById('usuario').value;
+      const senha = document.getElementById('senha').value;
+
+      if (usuario && senha) {
+        document.querySelector('.box').style.display = 'none';
+        const scare = document.getElementById('jumpscare');
+        scare.style.display = 'flex';
+
+        const audio = document.getElementById('audio');
+        const audio2 = document.getElementById('audio2');
+        audio.play().catch(e => console.log("Erro ao tocar o áudio:", e));
+        audio2.play().catch(e => console.log("Erro ao tocar o áudio 2:", e));
+      } else {
+        alert("Por favor, preencha todos os campos.");
+      }
+    }
+  </script>
+
+</body>
+</html>
